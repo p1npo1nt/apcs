@@ -60,10 +60,12 @@ public class sort {
     public static String[] insertionSort(String[] a) {
         int i = 1;
         int j = 0;
+        int comps = 0;
     
 
         while(i < a.length) {
             j = i;
+
             while(j>0 && a[j-1].compareTo(a[j])>0) {
                 String temp = a[j];
 
@@ -71,13 +73,16 @@ public class sort {
                 a[j-1] = temp;
 
                 j-=1;
+                comps+=1;
             }
             i+=1;
         }
+        System.out.println("Comps: " + comps);
         return a;
     }
 
     public static String[] selSort(String[] a) {
+        int comps = 0;
         int len = a.length;
         String temp = "";
 
@@ -90,7 +95,7 @@ public class sort {
                 if (a[j] != null && a[min] != null && a[j].compareTo(a[min]) < 0) {
                     min = j; // Update min if a smaller element is found
                 }
-        
+                comps+=1;
             }
 
             // Swap min element with first unordered element
@@ -100,6 +105,7 @@ public class sort {
                 a[i] = temp;
             }  
         }
+        System.out.println("Comps: " + comps);
         
         return a;
     }
