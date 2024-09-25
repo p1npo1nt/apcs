@@ -1,7 +1,5 @@
 import java.util.*;
 
-// while(i > 0 && (comps++>0 && a[i].compareTo(a[j])~~~~) 
-
 public class sort {
     
     public static void main(String[] args) {
@@ -9,11 +7,7 @@ public class sort {
         // Read-in 
         String[] a = getData();
 
-        String[] sorted = insertionSort(a);
-
-        for(int i = 0; i < sorted.length; i++) {
-            System.out.println(sorted[i]);
-        }
+        print(a);
  
     }
 
@@ -65,18 +59,24 @@ public class sort {
 
         while(i < a.length) {
             j = i;
+            
+            while(j>0) {
+                comps++;
 
-            while(j>0 && a[j-1].compareTo(a[j])>0) {
-                String temp = a[j];
-
-                a[j] = a[j-1];
-                a[j-1] = temp;
-
-                j-=1;
-                comps+=1;
+                if(a[j-1].compareTo(a[j])>0) {
+                    String temp = a[j];
+                    a[j] = a[j-1];
+                    a[j-1] = temp;
+                    j-=1;
+                }
+                else {
+                    break;
+                }    
             }
+            
             i+=1;
         }
+
         System.out.println("Comps: " + comps);
         return a;
     }
@@ -109,4 +109,16 @@ public class sort {
         
         return a;
     }
+
+    public static void print(String[] a) {
+        String[] sorted = selSort(a);
+        String output = "";
+
+        for(int i = 0; i < sorted.length; i++) {
+            output = output + sorted[i] + ", ";
+        }
+
+        System.out.println(output);
+    }
+
 }
