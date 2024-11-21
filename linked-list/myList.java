@@ -51,6 +51,8 @@ public class myList {
         //* sets reference of node previous to node containing d to the node following d, 
         //* returns boolean value on ability to be deleated or not
 
+        //! Edge case warning --- currently not able to delete last element of the linked list due to a null reference on its end [11/21 @ 5:35 PM]
+
         Node t = this.head;
 
         // head reference edge-case
@@ -58,15 +60,19 @@ public class myList {
             t.setNext(t.getNext().getNext());
         }
 
-        while (t != null) { 
-            
-            // find the desired node t with data d and set t's reference to the next next node such that it skips over the node with data d
-            if (t.getNext().getData().equals(d)){
+        // added RHS of and statement to make sure that 
+        // NullPointerException is not thrown when reaching the end of the linked list
+        while (t != null && t.getNext() != null) { 
+           
+            // find the desired node t with data d and set t's reference to the 
+            // next next node such that it skips over the node with data d
+            if (t.getNext().getData().equals(d)) {
                 t.setNext(t.getNext().getNext());
                 return true;
             }
 
-            t=t.getNext();
+
+            t = t.getNext();
         }
         
         return false;
