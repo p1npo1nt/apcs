@@ -15,4 +15,9 @@ public class Node {
     public Node getNext() { 
         return this.next;
     }
+
+    public void setNext(Node next) {
+        // updates reference to next node
+        this.next = next;
+    }
 }
