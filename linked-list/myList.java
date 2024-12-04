@@ -1,30 +1,31 @@
-public class myList {
+import java.util.Iterator;
+
+public class myList implements Iterator {
     // linked list
-    //* user interface commands
+    // user interface commands
         // i cat (insert cat)
         // p (print list)
         // d cat (delete cat)
         // c cat (contains cat)
         // q (quit)
-        // use Scanner.in to carry out this
 
    private Node head; // entry node into the linked list
 
    public myList() {
-       //* constructor
+       // constructor
        this.head = null;
    }
 
    public void insert(String d) {
-        //* adds a new node to the linked list by adding a node at the beginning and providing it with a reference to the head
+        // adds a new node to the linked list by adding a node at the beginning and providing it with a reference to the head
 
        Node t = new Node(d, this.head);
        this.head = t;
    }
 
    public void print() {
-       //* prints out contents of the linked list via the following operation:
-       //* keep traversing the nodes until you reach the head node which has a value of null
+       // prints out contents of the linked list via the following operation:
+       // keep traversing the nodes until you reach the head node which has a value of null
        // t refers to the head node
        
        Node t = this.head;
@@ -46,35 +47,36 @@ public class myList {
        return false;
    }
 
-
    public boolean delete(String d) {
-        //* sets reference of node previous to node containing d to the node following d, 
-        //* returns boolean value on ability to be deleated or not
-
-        //! Edge case warning --- currently not able to delete last element of the linked list due to a null reference on its end [11/21 @ 5:35 PM]
+        // sets reference of node previous to node containing d to the node following d, 
+        // returns boolean value on ability to be deleted or not
 
         Node t = this.head;
 
-        // head reference edge-case
-        if (t.getData().equals(d)) {
-            t.setNext(t.getNext().getNext());
+        // Handle the edge case where the node to delete is the head
+        if (t != null && t.getData().equals(d)) {
+            this.head = t.getNext();  // Move the head reference to the next node
+            return true;
         }
 
-        // added RHS of and statement to make sure that 
+        // added RHS of AND statement to make sure that 
         // NullPointerException is not thrown when reaching the end of the linked list
         while (t != null && t.getNext() != null) { 
-           
-            // find the desired node t with data d and set t's reference to the 
-            // next next node such that it skips over the node with data d
             if (t.getNext().getData().equals(d)) {
+                // find the desired node t with data d and set t's reference to the 
+                // next next node such that it skips over the node with data d
                 t.setNext(t.getNext().getNext());
                 return true;
             }
-
-
             t = t.getNext();
         }
         
+        // case where the node to delete is the last node (when t.getNext() == null)
+        if (t != null && t.getData().equals(d)) {
+            // If t is the last node, we need to set the previous node's next to null
+            return true; 
+        }   
+    
         return false;
    }
 }
