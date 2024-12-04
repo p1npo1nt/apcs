@@ -3,19 +3,14 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         myList list = new myList();
-
-        //* INPUT BLOCK
         Scanner sc = new Scanner(System.in); 
 
         while(true) {
             System.out.print("Enter cmd: ");
             // reads input and trims whitespaces, 'rest' variable contains the input excluding the command
             String input = sc.nextLine().trim();
-            String rest = input.substring(1, input.length()).trim();
-
-            if (input.isEmpty()) {
-                throw new IllegalArgumentException("No input command provided");
-            }
+            String rest = input.substring(input.indexOf(" ")+1, input.length()).trim();
+            //
 
             switch(input.charAt(0)) {
                 case 'p':
@@ -38,8 +33,9 @@ public class Main {
                     break;
                 case 'q':
                     sc.close();
-                    System.out.println("Exiting...");
                     return;
+                default:
+                    throw new IllegalArgumentException("No valid input command provided");
             }
         }
     }
