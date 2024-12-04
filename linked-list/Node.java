@@ -2,7 +2,7 @@ public class Node {
     private String d;
     private Node next;
 
-    // constructor
+    // constructor: data, next reference
     public Node(String d, Node next) { 
         this.d = d;
         this.next = next;
