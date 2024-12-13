@@ -1,6 +1,4 @@
-import java.util.Iterator;
-
-public class myList implements Iterator {
+public class myList {
     // linked list
     // user interface commands
         // i cat (insert cat)
