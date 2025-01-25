@@ -41,4 +41,6 @@ public class Stack {
         if (isEmpty()) {System.out.println ("Stack is empty"); return 0; }
         else { return a[top]; }
     }
+
+    public int size() { return top + 1; }
 }

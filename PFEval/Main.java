@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 class Main{
@@ -22,44 +21,51 @@ class Main{
     public static double PFEval(String[] exp) {
         Stack numbers = new Stack();
         
-        
         for (String t : exp) {
             if(isNumeric(t)) {
                 numbers.push(Double.parseDouble(t));
             }
             else {
                 // a is the RHS operand, b is the LHS operand
-                double a = numbers.pop();
-                double b = numbers.pop();
+                
+                if (numbers.size() >= 2) {
+                    double a = numbers.pop();
+                    double b = numbers.pop();
 
-                String operator = t;
-                switch(operator) {
-                    case "+":
-                        numbers.push(b+a);
-                        break;
-                    case "-":
-                        numbers.push(b-a);
-                        break;
-                    case "*":
-                        numbers.push(b*a);
-                        break;
-                    case "/":
-                        if (a != 0) {
-                            numbers.push(b/a);  
-                        } else {
-                            System.out.println("Error: Division by zero.");
-                            // GIGO
-                            return -1;
-                        }
-                        break;
-                    default:
-                        System.out.println("Unknown operator encountered");
-                        return -1;
+                    String operator = t;
+                    switch(operator) {
+                        case "+":
+                            numbers.push(b+a);
+                            break;
+                        case "-":
+                            numbers.push(b-a);
+                            break;
+                        case "*":
+                            numbers.push(b*a);
+                            break;
+                        case "/":
+                            if (a != 0) {
+                                numbers.push(b/a);  
+                            } else {
+                                System.out.println("Error: Division by zero.");
+                                // GIGO
+                                return -1;
+                            }
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unknown operator encountered");
+                    }   
                 }
-            } 
-        }
-
+                else {
+                        throw new IllegalArgumentException("Invalid postfix expression");
+                } 
+            }
+        } 
         // Should be one element in the stack, pop it, that's the result
+        if (numbers.size() > 1) {
+            // handles the case where a binary operator takes >2 operands 
+            throw new IllegalArgumentException("Invalid postfix epression");
+        }
         return numbers.pop();
     }
 
