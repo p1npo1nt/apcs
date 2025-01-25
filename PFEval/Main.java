@@ -18,8 +18,9 @@ class Main{
 
     }
 
+    
     public static double PFEval(String[] exp) {
-        Stack numbers = new Stack();
+        myStack<Double> numbers = new myStack<>();
         
         for (String t : exp) {
             if(isNumeric(t)) {
@@ -28,7 +29,7 @@ class Main{
             else {
                 // a is the RHS operand, b is the LHS operand
                 
-                if (numbers.size() >= 2) {
+                if (numbers.getSize() >= 2) {
                     double a = numbers.pop();
                     double b = numbers.pop();
 
@@ -62,7 +63,7 @@ class Main{
             }
         } 
         // Should be one element in the stack, pop it, that's the result
-        if (numbers.size() > 1) {
+        if (numbers.getSize() > 1) {
             // handles the case where a binary operator takes >2 operands 
             throw new IllegalArgumentException("Invalid postfix epression");
         }

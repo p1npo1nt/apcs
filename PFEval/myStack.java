@@ -1,15 +1,16 @@
-
-public class Stack {
+public class myStack<E> {
+    // array based stack
+    
     public static final int max = 1000;
     int top;
+    E[] a;
 
-    double[] a = new double[max];
-
-    public Stack() {
+    @SuppressWarnings("unchecked")
+    public myStack() {
         top = -1;
+        a = (E[]) new Object[max]; // creating a generic array via casting Object to E
     }
 
-    // if our top element is at index max-1, we know that the stack is full.
     public boolean isFull() {
         return top >= max-1;
     }
@@ -18,8 +19,7 @@ public class Stack {
         return top < 0;
     }
 
-    // increment top, push k doubleo a[top]
-    public void push(double k) {
+    public void push(E k) {
         if (isFull()) { throw new IllegalArgumentException("Stack overflow"); }
         else {
             top = top + 1;
@@ -27,20 +27,21 @@ public class Stack {
         }
     }
 
-    // store the value at the top of the stack, decrement it, return the stored value
-    public double pop() {
+    public E pop() {
         if (isEmpty()) { throw new IllegalArgumentException("Stack underflow"); }
         else {
-            double stored = a[top];
+            E stored = a[top];
             top = top - 1;
             return stored; 
         }
     }
 
-    public double peek() {
-        if (isEmpty()) {System.out.println ("Stack is empty"); return 0; }
+    public E peek() {
+        if (isEmpty()) { System.out.println("Stack is empty"); return null; }
         else { return a[top]; }
     }
 
-    public int size() { return top + 1; }
+    public int getSize() {
+        return top + 1; 
+    }
 }
