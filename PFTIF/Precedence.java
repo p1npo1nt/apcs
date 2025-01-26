@@ -9,6 +9,7 @@ public class Precedence {
         this.ST_precedence = ST_precedence;
 
     }
+    
     public int getInputPrecedence(String operator) {
         for (int i = 0; i < operators.length; i++) {
             if (operators[i].equals(operator)) {
